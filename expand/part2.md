@@ -32,4 +32,49 @@ So discountedPrice = 150
 
 console.log(discountedPrice); logs 150
 
-^^^ 3. What will happen at line 14 and why? If the code causes an error, explain why. ^^^
+### 3. What will happen at line 14 and why? If the code causes an error, explain why.
+
+At line 14, you log the variable finalPrice outside the for loop. Since finalPrice was declared with var at the top of the function
+
+it is function-scoped and thus accessible anywhere inside discountPrices, including after the loop.
+
+Therefore:
+No error will occur.
+
+It will print the last value assigned to finalPrice during the final iteration of the loop.
+
+For discountPrices([100, 200, 300], 0.5):
+
+Iteration 0 → finalPrice = 50
+
+Iteration 1 → finalPrice = 100
+
+Iteration 2 → finalPrice = 150
+
+After loop, console.log(finalPrice); logs: 150
+
+### 4. What will this function return? Give a brief explanation why. If the code causes an error, explain why.
+
+**Return value:**
+```js
+[50, 100, 150]
+
+Explanation:
+
+The function loops over each element in prices (100, 200, 300).
+
+For each price it computes discountedPrice = price * (1 - discount)
+
+so with discount = 0.5 you get 50, 100, and 150.
+
+It then rounds to two decimal places via Math.round(discountedPrice * 100) / 100
+
+Each rounded value is pushed into the discounted array, which is finally returned.
+
+No errors occur because all variables are declared with var (function-scoped), so the loop and rounding logic execute correctly.
+
+### 5. What happens at line 12 and why?
+
+At line 12, the statement
+```js
+console.log(i)
