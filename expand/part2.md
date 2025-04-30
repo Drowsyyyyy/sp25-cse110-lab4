@@ -144,3 +144,44 @@ F. true === Boolean(2) → true
 Boolean(2) is true, so true===true.
 
 ### 15. The == operator performs type coercion before comparing (e.g. '2'==2 is true), whereas === requires both value and type to match exactly (so '2'===2 is false).
+
+### 17. If the function above is called with the following parameters modifyArray([1,2,3], doSomething), what will be the result? Briefly walk through how you arrived at that result. (This should be in your part2.md). Here we are passing in a function as a parameter, however we can also return a function from another function just as easily, you're encouraged to play around with callbacks as they are used heavily in frontend JS development. 
+
+The call
+
+modifyArray([1,2,3], doSomething); will return [2, 4, 6]
+
+Walk-through
+
+We start with array = [1,2,3] and callback = doSomething, where doSomething(num) returns num * 2.
+
+Inside modifyArray, we create an empty newArr = [].
+
+Loop over each element of array:
+
+i = 0 → array[0] is 1 → callback(1) returns 2 → push 2 into newArr.
+
+i = 1 → array[1] is 2 → callback(2) returns 4 → push 4.
+
+i = 2 → array[2] is 3 → callback(3) returns 6 → push 6.
+
+After the loop, newArr is [2, 4, 6], and that’s what modifyArray returns.
+
+### 19. What is the output of the above code?
+
+The numbers will be printed in this order:
+
+1
+4
+3
+2
+
+Why:
+
+console.log(1) runs immediately.
+
+console.log(4) runs next, still on the main call stack.
+
+The two setTimeout callbacks are both queued once the stack is empty; even a 0 ms timer waits until after the current code finishes, so the 0 ms callback (console.log(3)) runs next.
+
+Finally, after about 1000 ms, the 1000 ms callback (console.log(2)) fires.
